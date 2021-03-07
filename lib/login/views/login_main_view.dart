@@ -1,5 +1,6 @@
 import 'package:authentication_with_bloc/authenticaiton/bloc/authentication_bloc.dart';
 import 'package:authentication_with_bloc/home/views/home_main_view.dart';
+import 'package:authentication_with_bloc/login/views/login_phone_number_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,7 +20,7 @@ class LoginMainView extends StatelessWidget {
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => HomeMainView()));
                 } else if (state is AuthenticationFailiure) {
-                  Scaffold.of(context).showSnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(state.message),
                     ),
@@ -36,12 +37,29 @@ class LoginMainView extends StatelessWidget {
                 if (state is AuthenticationInitial ||
                     state is AuthenticationFailiure) {
                   return Center(
-                    child: OutlineButton(
-                      onPressed: () =>
-                          BlocProvider.of<AuthenticationBloc>(context).add(
-                        AuthenticationGoogleStarted(),
-                      ),
-                      child: Text('Login with Google'),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        OutlinedButton(
+                          onPressed: () =>
+                              BlocProvider.of<AuthenticationBloc>(context).add(
+                            AuthenticationGoogleStarted(),
+                          ),
+                          child: Text('Login with Google'),
+                        ),
+                        OutlinedButton(
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginPhoneNumberView(),
+                              ),
+                            );
+                          },
+                          child: Text('Login with Phone Number'),
+                        ),
+                      ],
                     ),
                   );
                 } else if (state is AuthenticationLoading) {
