@@ -37,7 +37,7 @@ class HomeMainView extends StatelessWidget {
               } else if (state is AuthenticationLoading) {
                 return CircularProgressIndicator();
               } else if (state is AuthenticationSuccess) {
-                return Text('Welcome :${state.authenticationDetail.email}');
+                return Text('Welcome :${state.authenticationDetail.uid}');
               }
               return Text('Undefined state : ${state.runtimeType}');
             },
