@@ -42,8 +42,6 @@ class _PhoneAuthViewBuilder extends StatelessWidget {
         } else if (current is PhoneAuthError) {
           _showSnackBarWithText(
               context: context, textValue: 'Uexpected error occurred.');
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Uexpected error occurred.')));
         } else if (current is PhoneAuthNumberVerficationFailure) {
           _showSnackBarWithText(context: context, textValue: current.message);
         } else if (current is PhoneAuthNumberVerificationSuccess) {
@@ -87,6 +85,7 @@ class _PhoneAuthViewBuilder extends StatelessWidget {
               child: TextField(
                 controller: _countryCodeController,
                 maxLength: 3,
+                obscureText: true,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   prefixText: '+',
@@ -100,6 +99,7 @@ class _PhoneAuthViewBuilder extends StatelessWidget {
             SizedBox(
               width: 250,
               child: TextField(
+                obscureText: true,
                 controller: _phoneNumberController,
                 maxLength: 10,
                 keyboardType: TextInputType.number,
