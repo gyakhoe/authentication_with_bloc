@@ -1,21 +1,19 @@
 import 'package:authentication_with_bloc/phone_auth/data/models/phone_auth_model.dart';
 import 'package:authentication_with_bloc/phone_auth/data/provider/phone_auth_firebase_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 
 class PhoneAuthRepository {
   final PhoneAuthFirebaseProvider _phoneAuthFirebaseProvider;
   PhoneAuthRepository({
-    @required PhoneAuthFirebaseProvider phoneAuthFirebaseProvider,
-  })  : assert(phoneAuthFirebaseProvider != null),
-        _phoneAuthFirebaseProvider = phoneAuthFirebaseProvider;
+    required PhoneAuthFirebaseProvider phoneAuthFirebaseProvider,
+  }) : _phoneAuthFirebaseProvider = phoneAuthFirebaseProvider;
 
   Future<void> verifyPhoneNumber({
-    @required String phoneNumber,
-    @required onVerificationCompleted,
-    @required onVerificaitonFailed,
-    @required onCodeSent,
-    @required onCodeAutoRetrievalTimeOut,
+    required String phoneNumber,
+    required onVerificationCompleted,
+    required onVerificaitonFailed,
+    required onCodeSent,
+    required onCodeAutoRetrievalTimeOut,
   }) async {
     await _phoneAuthFirebaseProvider.verifyPhoneNumber(
         onCodeAutoRetrievalTimeOut: onCodeAutoRetrievalTimeOut,
@@ -26,10 +24,10 @@ class PhoneAuthRepository {
   }
 
   Future<PhoneAuthModel> verifySMSCode({
-    @required String smsCode,
-    @required String verificationId,
+    required String smsCode,
+    required String verificationId,
   }) async {
-    final User user =
+    final User? user =
         await _phoneAuthFirebaseProvider.loginWithSMSVerificationCode(
             verificationId: verificationId, smsVerficationcode: smsCode);
     if (user != null) {
@@ -43,9 +41,9 @@ class PhoneAuthRepository {
   }
 
   Future<PhoneAuthModel> verifyWithCredential({
-    @required AuthCredential credential,
+    required AuthCredential credential,
   }) async {
-    User user = await _phoneAuthFirebaseProvider.authenticationWithCredential(
+    User? user = await _phoneAuthFirebaseProvider.authenticationWithCredential(
       credential: credential,
     );
     if (user != null) {

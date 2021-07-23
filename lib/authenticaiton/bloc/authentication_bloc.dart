@@ -4,8 +4,6 @@ import 'package:authentication_with_bloc/authenticaiton/data/repositories/authen
 import 'package:authentication_with_bloc/authenticaiton/models/authentication_detail.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
-
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
@@ -14,12 +12,11 @@ class AuthenticationBloc
   final AuthenticationRepository _authenticationRepository;
 
   AuthenticationBloc(
-      {@required AuthenticationRepository authenticationRepository})
-      : assert(authenticationRepository != null),
-        _authenticationRepository = authenticationRepository,
+      {required AuthenticationRepository authenticationRepository})
+      : _authenticationRepository = authenticationRepository,
         super(AuthenticationInitial());
 
-  StreamSubscription<AuthenticationDetail> authStreamSub;
+  StreamSubscription<AuthenticationDetail>? authStreamSub;
 
   @override
   Future<void> close() {
@@ -46,7 +43,7 @@ class AuthenticationBloc
             message: 'Error occrued while fetching auth detail');
       }
     } else if (event is AuthenticationStateChanged) {
-      if (event.authenticationDetail.isValid) {
+      if (event.authenticationDetail.isValid!) {
         yield AuthenticationSuccess(
             authenticationDetail: event.authenticationDetail);
       } else {
@@ -58,7 +55,7 @@ class AuthenticationBloc
         AuthenticationDetail authenticationDetail =
             await _authenticationRepository.authenticateWithGoogle();
 
-        if (authenticationDetail.isValid) {
+        if (authenticationDetail.isValid!) {
           yield AuthenticationSuccess(
               authenticationDetail: authenticationDetail);
         } else {

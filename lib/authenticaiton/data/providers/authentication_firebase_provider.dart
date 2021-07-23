@@ -1,19 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 
 class AuthenticationFirebaseProvider {
   final FirebaseAuth _firebaseAuth;
   AuthenticationFirebaseProvider({
-    @required FirebaseAuth firebaseAuth,
-  })  : assert(firebaseAuth != null),
-        _firebaseAuth = firebaseAuth;
+    required FirebaseAuth firebaseAuth,
+  }) : _firebaseAuth = firebaseAuth;
 
-  Stream<User> getAuthStates() {
+  Stream<User?> getAuthStates() {
     return _firebaseAuth.authStateChanges();
   }
 
-  Future<User> login({
-    @required AuthCredential credential,
+  Future<User?> login({
+    required AuthCredential credential,
   }) async {
     UserCredential userCredential =
         await _firebaseAuth.signInWithCredential(credential);

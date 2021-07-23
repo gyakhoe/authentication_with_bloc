@@ -5,16 +5,14 @@ import 'package:authentication_with_bloc/phone_auth/data/repositories/phone_auth
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 
 part 'phone_auth_event.dart';
 part 'phone_auth_state.dart';
 
 class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
   final PhoneAuthRepository _phoneAuthRepository;
-  PhoneAuthBloc({@required PhoneAuthRepository phoneAuthRepository})
-      : assert(phoneAuthRepository != null),
-        _phoneAuthRepository = phoneAuthRepository,
+  PhoneAuthBloc({required PhoneAuthRepository phoneAuthRepository})
+      : _phoneAuthRepository = phoneAuthRepository,
         super(PhoneAuthInitial());
 
   @override
@@ -81,7 +79,7 @@ class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
     add(PhoneAuthVerificationFailed(exception.toString()));
   }
 
-  void _onCodeSent(String verificationId, int token) {
+  void _onCodeSent(String verificationId, int? token) {
     print(
         'Print code is successfully sent with verification id $verificationId and token $token');
 

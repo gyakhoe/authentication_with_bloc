@@ -1,16 +1,14 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 class AuthenticationDetail {
-  final bool isValid;
-  final String uid;
-  final String photoUrl;
-  final String email;
-  final String name;
+  final bool? isValid;
+  final String? uid;
+  final String? photoUrl;
+  final String? email;
+  final String? name;
 
   AuthenticationDetail({
-    @required this.isValid,
+    required this.isValid,
     this.uid,
     this.photoUrl,
     this.email,
@@ -18,11 +16,11 @@ class AuthenticationDetail {
   });
 
   AuthenticationDetail copyWith({
-    bool isValid,
-    String uid,
-    String photoUrl,
-    String email,
-    String name,
+    bool? isValid,
+    String? uid,
+    String? photoUrl,
+    String? email,
+    String? name,
   }) {
     return AuthenticationDetail(
       isValid: isValid ?? this.isValid,
@@ -43,15 +41,13 @@ class AuthenticationDetail {
     };
   }
 
-  factory AuthenticationDetail.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
+  factory AuthenticationDetail.fromMap(Map<String, dynamic>? map) {
     return AuthenticationDetail(
-      isValid: map['isValid'],
-      uid: map['uid'],
-      photoUrl: map['photoUrl'],
-      email: map['email'],
-      name: map['name'],
+      isValid: map?['isValid'],
+      uid: map?['uid'],
+      photoUrl: map?['photoUrl'],
+      email: map?['email'],
+      name: map?['name'],
     );
   }
 

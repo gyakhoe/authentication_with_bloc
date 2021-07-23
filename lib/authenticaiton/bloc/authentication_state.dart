@@ -14,7 +14,7 @@ class AuthenticationLoading extends AuthenticationState {}
 class AuthenticationFailiure extends AuthenticationState {
   final String message;
   AuthenticationFailiure({
-    @required this.message,
+    required this.message,
   });
   @override
   List<Object> get props => [message];
@@ -23,7 +23,7 @@ class AuthenticationFailiure extends AuthenticationState {
 class AuthenticationSuccess extends AuthenticationState {
   final AuthenticationDetail authenticationDetail;
   AuthenticationSuccess({
-    @required this.authenticationDetail,
+    required this.authenticationDetail,
   });
   @override
   List<Object> get props => [authenticationDetail];
