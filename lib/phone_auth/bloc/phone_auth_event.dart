@@ -4,13 +4,13 @@ abstract class PhoneAuthEvent extends Equatable {
   const PhoneAuthEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class PhoneAuthNumberVerified extends PhoneAuthEvent {
   final String phoneNumber;
   PhoneAuthNumberVerified({
-    @required this.phoneNumber,
+    required this.phoneNumber,
   });
 
   @override
@@ -21,8 +21,8 @@ class PhoneAuthCodeVerified extends PhoneAuthEvent {
   final String verificationId;
   final String smsCode;
   PhoneAuthCodeVerified({
-    @required this.verificationId,
-    @required this.smsCode,
+    required this.verificationId,
+    required this.smsCode,
   });
 
   @override
@@ -38,14 +38,14 @@ class PhoneAuthCodeAutoRetrevalTimeout extends PhoneAuthEvent {
 
 class PhoneAuthCodeSent extends PhoneAuthEvent {
   final String verificationId;
-  final int token;
+  final int? token;
   PhoneAuthCodeSent({
-    @required this.verificationId,
-    @required this.token,
+    required this.verificationId,
+    required this.token,
   });
 
   @override
-  List<Object> get props => [verificationId, token];
+  List<Object> get props => [verificationId];
 }
 
 class PhoneAuthVerificationFailed extends PhoneAuthEvent {
@@ -57,8 +57,8 @@ class PhoneAuthVerificationFailed extends PhoneAuthEvent {
 }
 
 class PhoneAuthVerificationCompleted extends PhoneAuthEvent {
-  final String uid;
+  final String? uid;
   PhoneAuthVerificationCompleted(this.uid);
   @override
-  List<Object> get props => [uid];
+  List<Object?> get props => [uid];
 }

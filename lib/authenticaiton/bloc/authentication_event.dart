@@ -12,7 +12,7 @@ class AuthenticationStarted extends AuthenticationEvent {}
 class AuthenticationStateChanged extends AuthenticationEvent {
   final AuthenticationDetail authenticationDetail;
   AuthenticationStateChanged({
-    @required this.authenticationDetail,
+    required this.authenticationDetail,
   });
   @override
   List<Object> get props => [authenticationDetail];

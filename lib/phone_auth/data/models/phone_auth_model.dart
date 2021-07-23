@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 enum PhoneAuthModelState {
   codeSent,
   autoVerified,
@@ -11,22 +9,22 @@ enum PhoneAuthModelState {
 
 class PhoneAuthModel {
   final PhoneAuthModelState phoneAuthModelState;
-  final String verificationId;
-  final int verificationToken;
-  final String uid;
+  final String? verificationId;
+  final int? verificationToken;
+  final String? uid;
 
   PhoneAuthModel({
-    @required this.phoneAuthModelState,
+    required this.phoneAuthModelState,
     this.verificationId,
     this.verificationToken,
     this.uid,
   });
 
   PhoneAuthModel copyWith({
-    PhoneAuthModelState phoneAuthModelState,
-    String verificationId,
-    int verificationToken,
-    String uid,
+    PhoneAuthModelState? phoneAuthModelState,
+    String? verificationId,
+    int? verificationToken,
+    String? uid,
   }) {
     return PhoneAuthModel(
       phoneAuthModelState: phoneAuthModelState ?? this.phoneAuthModelState,
@@ -38,22 +36,20 @@ class PhoneAuthModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'phoneAuthModelState': phoneAuthModelState?.index,
+      'phoneAuthModelState': phoneAuthModelState.index,
       'verificationId': verificationId,
       'verificationToken': verificationToken,
       'uid': uid,
     };
   }
 
-  factory PhoneAuthModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
+  factory PhoneAuthModel.fromMap(Map<String, dynamic>? map) {
     return PhoneAuthModel(
       phoneAuthModelState:
-          PhoneAuthModelState.values[map['phoneAuthModelState']],
-      verificationId: map['verificationId'],
-      verificationToken: map['verificationToken'],
-      uid: map['uid'],
+          PhoneAuthModelState.values[map?['phoneAuthModelState']],
+      verificationId: map?['verificationId'],
+      verificationToken: map?['verificationToken'],
+      uid: map?['uid'],
     );
   }
 

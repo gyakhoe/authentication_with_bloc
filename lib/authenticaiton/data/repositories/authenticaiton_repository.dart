@@ -2,17 +2,14 @@ import 'package:authentication_with_bloc/authenticaiton/data/providers/authentic
 import 'package:authentication_with_bloc/authenticaiton/data/providers/google_sign_in_provider.dart';
 import 'package:authentication_with_bloc/authenticaiton/models/authentication_detail.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 
 class AuthenticationRepository {
   final AuthenticationFirebaseProvider _authenticationFirebaseProvider;
   final GoogleSignInProvider _googleSignInProvider;
   AuthenticationRepository(
-      {@required AuthenticationFirebaseProvider authenticationFirebaseProvider,
-      @required GoogleSignInProvider googleSignInProvider})
-      : assert(authenticationFirebaseProvider != null ||
-            googleSignInProvider != null),
-        _googleSignInProvider = googleSignInProvider,
+      {required AuthenticationFirebaseProvider authenticationFirebaseProvider,
+      required GoogleSignInProvider googleSignInProvider})
+      : _googleSignInProvider = googleSignInProvider,
         _authenticationFirebaseProvider = authenticationFirebaseProvider;
 
   Stream<AuthenticationDetail> getAuthDetailStream() {
@@ -22,7 +19,7 @@ class AuthenticationRepository {
   }
 
   Future<AuthenticationDetail> authenticateWithGoogle() async {
-    User user = await _authenticationFirebaseProvider.login(
+    User? user = await _authenticationFirebaseProvider.login(
         credential: await _googleSignInProvider.login());
     return _getAuthCredentialFromFirebaseUser(user: user);
   }
@@ -33,7 +30,7 @@ class AuthenticationRepository {
   }
 
   AuthenticationDetail _getAuthCredentialFromFirebaseUser(
-      {@required User user}) {
+      {required User? user}) {
     AuthenticationDetail authDetail;
     if (user != null) {
       authDetail = AuthenticationDetail(

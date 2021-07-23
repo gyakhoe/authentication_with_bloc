@@ -157,7 +157,7 @@ class _PhoneAuthViewBuilder extends StatelessWidget {
   }
 
   void _showSnackBarWithText(
-      {@required BuildContext context, String textValue}) {
+      {required BuildContext context, required String textValue}) {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text(textValue)));
   }
